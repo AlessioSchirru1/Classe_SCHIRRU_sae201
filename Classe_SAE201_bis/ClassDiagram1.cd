@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="classes_sae201.Metier.Allergene">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Metier\Allergene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.Categorie">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Metier\Categorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.CategorieEvenement">
+    <Position X="4.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAiAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Metier\CategorieEvenement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.Client">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAACAAAAAAAKAAAQAAIAA=</HashCode>
+      <FileName>Metier\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.Commande">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAAAiAAAAQAAEABCAAAAAQAAQQAAAAACAAAAAIAQ=</HashCode>
+      <FileName>Metier\Commande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.LigneCommande">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAIAAgAAAA=</HashCode>
+      <FileName>Metier\LigneCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.Produit">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAQAAAAAAAAEIAAAAAAAAAQAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Metier\Produit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="classes_sae201.Metier.Recette">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAABAAAAAkAAAAAAEAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Metier\Recette.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
