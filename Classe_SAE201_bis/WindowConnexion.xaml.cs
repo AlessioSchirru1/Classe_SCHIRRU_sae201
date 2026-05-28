@@ -1,6 +1,7 @@
-﻿using System.Windows;
-using Classe_SAE201_bis.DAL;
+﻿using Classe_SAE201_bis.DAL;
 using Classe_SAE201_bis.Metier;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Classe_SAE201_bis
 {
@@ -38,5 +39,22 @@ namespace Classe_SAE201_bis
 				TxtErreur.Visibility = Visibility.Visible;
 			}
 		}
-	}
+
+        private void TxtLogin_TextChanged( object sender, TextChangedEventArgs e )
+        {
+            PlaceholderLogin.Visibility = string.IsNullOrEmpty(TxtLogin.Text)
+                ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void TxtPassword_PasswordChanged( object sender, RoutedEventArgs e )
+        {
+            PlaceholderPassword.Visibility = string.IsNullOrEmpty(TxtPassword.Password)
+                ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void BtnFermer_Click( object sender, RoutedEventArgs e )
+        {
+            Application.Current.Shutdown();
+        }
+    }
 }
