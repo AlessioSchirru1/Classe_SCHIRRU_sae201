@@ -1,0 +1,74 @@
+﻿<Window x:Class="Classe_SAE201_bis.WindowConnexion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PAUL - Connexion" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F5EDE3">
+
+    <Grid>
+        <!-- Carte centrale -->
+        <Border Width="420" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Background="White" CornerRadius="16"
+                Padding="40,36">
+            <StackPanel>
+
+                <!-- Logo PAUL -->
+                <TextBlock Text="PAUL"
+                           FontSize="38" FontWeight="Bold"
+                           FontFamily="Georgia"
+                           HorizontalAlignment="Center"
+                           Foreground="#2C1810"/>
+
+                <!-- Sous-titre -->
+                <TextBlock Text="Maison de qualité fondée en 1889"
+                           FontSize="13" FontStyle="Italic"
+                           HorizontalAlignment="Center"
+                           Foreground="#888" Margin="0,4,0,28"/>
+
+                <!-- Identifiant -->
+                <TextBlock Text="Identifiant" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#2C1810" Margin="0,0,0,6"/>
+                <Border Background="#F5EDE3" CornerRadius="8" Padding="12,10" Margin="0,0,0,16">
+                    <TextBox x:Name="TxtLogin" BorderThickness="0"
+                             Background="Transparent" FontSize="14"
+                             Foreground="#2C1810"
+                             Text="Votre identifiant"/>
+                </Border>
+
+                <!-- Mot de passe -->
+                <TextBlock Text="Mot de passe" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#2C1810" Margin="0,0,0,6"/>
+                <Border Background="#F5EDE3" CornerRadius="8" Padding="12,10" Margin="0,0,0,28">
+                    <PasswordBox x:Name="TxtPassword" BorderThickness="0"
+                                 Background="Transparent" FontSize="14"
+                                 Foreground="#2C1810"/>
+                </Border>
+
+                <!-- Message d'erreur -->
+                <TextBlock x:Name="TxtErreur" Text="" Foreground="Red"
+                           FontSize="12" HorizontalAlignment="Center"
+                           Margin="0,0,0,12" Visibility="Collapsed"/>
+
+                <!-- Bouton Se connecter -->
+                <Button x:Name="BtnConnecter" Content="Se connecter"
+                        Height="44" FontSize="14" FontWeight="SemiBold"
+                        Foreground="White" Background="#6B3A2A"
+                        BorderThickness="0" Cursor="Hand"
+                        Margin="0,0,0,12"
+                        Click="BtnConnecter_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="8">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
