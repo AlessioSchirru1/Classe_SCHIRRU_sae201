@@ -1,25 +1,30 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
 using Npgsql;
 
 namespace Classe_SAE201_bis.DAL
 {
-    /// <summary>
-    /// Gère la connexion PostgreSQL.
-    /// Le mot de passe est géré par PostgreSQL — on ne le stocke pas.
-    /// La connexion se fait avec le login/mdp de l'employé.
-    /// </summary>
     public class DALConnexion
     {
         private static NpgsqlConnection _connexion;
 
-        // À adapter selon votre serveur IUT
-        private const string SERVEUR = "srv-peda-new";
-        private const string PORT    = "5433";
-        private const string BASE    = "ikadarni_paul";
+        private static string SERVEUR;
+        private static string PORT;
+        private static string BASE;
 
-        /// <summary>
-        /// Ouvre une connexion avec le login et mot de passe PostgreSQL de l'employé.
-        /// </summary>
+        static DALConnexion()
+        {
+            // Cherche config.json dans le dossier du projet
+            string chemin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
+            string json = File.ReadAllText(chemin);
+            var config = JsonDocument.Parse(json).RootElement;
+
+            SERVEUR = config.GetProperty("serveur").GetString();
+            PORT = config.GetProperty("port").GetString();
+            BASE = config.GetProperty("base").GetString();
+        }
+
         public static NpgsqlConnection OuvrirConnexion( string login, string motDePasse )
         {
             string chaineCnx = $"Host={SERVEUR};Port={PORT};Database={BASE};" +
@@ -29,9 +34,6 @@ namespace Classe_SAE201_bis.DAL
             return _connexion;
         }
 
-        /// <summary>
-        /// Retourne la connexion déjà ouverte.
-        /// </summary>
         public static NpgsqlConnection GetConnexion()
         {
             if(_connexion == null || _connexion.State != System.Data.ConnectionState.Open)
@@ -39,9 +41,6 @@ namespace Classe_SAE201_bis.DAL
             return _connexion;
         }
 
-        /// <summary>
-        /// Ferme la connexion proprement.
-        /// </summary>
         public static void FermerConnexion()
         {
             if(_connexion != null && _connexion.State == System.Data.ConnectionState.Open)
@@ -51,9 +50,6 @@ namespace Classe_SAE201_bis.DAL
             }
         }
 
-        /// <summary>
-        /// Récupère le login PostgreSQL de l'utilisateur connecté (current_user).
-        /// </summary>
         public static string GetCurrentUser()
         {
             using var cmd = new NpgsqlCommand("SELECT current_user", GetConnexion());
