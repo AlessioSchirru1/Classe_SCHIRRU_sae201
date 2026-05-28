@@ -12,10 +12,11 @@ namespace Classe_SAE201_bis.DAL
         private static string SERVEUR;
         private static string PORT;
         private static string BASE;
+        private static string SCHEMA;
+
 
         static DALConnexion()
         {
-            // Cherche config.json dans le dossier du projet
             string chemin = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
             string json = File.ReadAllText(chemin);
             var config = JsonDocument.Parse(json).RootElement;
@@ -23,14 +24,17 @@ namespace Classe_SAE201_bis.DAL
             SERVEUR = config.GetProperty("serveur").GetString();
             PORT = config.GetProperty("port").GetString();
             BASE = config.GetProperty("base").GetString();
+            SCHEMA = config.GetProperty("schema").GetString();
         }
 
         public static NpgsqlConnection OuvrirConnexion( string login, string motDePasse )
         {
             string chaineCnx = $"Host={SERVEUR};Port={PORT};Database={BASE};" +
-                               $"Username={login};Password={motDePasse};";
+                       $"Username={login};Password={motDePasse};";
             _connexion = new NpgsqlConnection(chaineCnx);
             _connexion.Open();
+            using var cmd = new NpgsqlCommand($"SET search_path TO \"{SCHEMA}\", public;", _connexion);
+            cmd.ExecuteNonQuery();
             return _connexion;
         }
 
