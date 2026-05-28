@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace classes_sae201.Metier
+﻿using Classe_SAE201_bis.Metier;
+namespace Classe_SAE201_bis.Metier
 {
-    internal class LigneCommande
+    public class LigneCommande
     {
         public int Quantite { get; set; }
         public bool EstDecoupe { get; set; }
         public Produit Produit { get; set; }
 
-        public LigneCommande(Produit produit, int quantite)
+        public LigneCommande( Produit produit, int quantite, bool estDecoupe = false )
         {
-            throw new NotImplementedException();
+            Produit = produit;
+            Quantite = quantite;
+            EstDecoupe = estDecoupe;
         }
 
         public double CalculerSousTotal()
         {
-            throw new NotImplementedException();
+            return Produit.Prix * Quantite;
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{Produit} x{Quantite} = {CalculerSousTotal():C}";
         }
     }
 }

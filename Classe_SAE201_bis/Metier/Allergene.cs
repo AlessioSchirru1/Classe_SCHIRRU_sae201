@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace classes_sae201.Metier
+namespace Classe_SAE201_bis.Metier
 {
-    internal class Allergene
+    public class Allergene
     {
         public int AllergeneId { get; set; }
         public string AllergeneNom { get; set; }
 
-        public Allergene(string nom)
+        public Allergene( int id, string nom )
         {
-            throw new NotImplementedException();
+            AllergeneId = id;
+            AllergeneNom = nom;
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return AllergeneNom;
         }
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace classes_sae201.Metier
+namespace Classe_SAE201_bis.Metier
 {
-    internal class Recette
+    public class Recette
     {
         public int RecetteId { get; set; }
         public string RecetteNom { get; set; }
@@ -14,14 +10,21 @@ namespace classes_sae201.Metier
         public Categorie Categorie { get; set; }
         public List<Allergene> Allergenes { get; set; }
 
-        public Recette(string nom, string description, Categorie categorie)
+        public Recette( int id, string nom, string description, Categorie categorie )
         {
-            throw new NotImplementedException();
+            RecetteId = id;
+            RecetteNom = nom;
+            RecetteDescription = description;
+            Categorie = categorie;
+            Allergenes = new List<Allergene>();
         }
+
+        public Recette( string nom, string description, Categorie categorie )
+            : this(0, nom, description, categorie) { }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return RecetteNom;
         }
     }
 }

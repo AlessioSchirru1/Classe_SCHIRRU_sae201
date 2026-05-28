@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace classes_sae201.Metier
+﻿namespace Classe_SAE201_bis.Metier
 {
-    internal class Categorie
+    public class Categorie
     {
         public int CategorieId { get; set; }
         public string CategorieNom { get; set; }
 
-        public Categorie(string nom)
+        public Categorie( int id, string nom )
         {
-            throw new NotImplementedException();
+            CategorieId = id;
+            CategorieNom = nom;
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return CategorieNom;
         }
     }
 }

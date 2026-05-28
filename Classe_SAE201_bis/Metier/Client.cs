@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Classe_SAE201_bis.Metier;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace classes_sae201.Metier
+namespace Classe_SAE201_bis.Metier
 {
-    internal class Client
+    public class Client
     {
         public int ClientId { get; set; }
         public string Nom { get; set; }
@@ -15,14 +12,22 @@ namespace classes_sae201.Metier
         public string Mail { get; set; }
         public List<Commande> Commandes { get; set; }
 
-        public Client(string nom, string prenom, string telephone, string mail)
+        public Client( int id, string nom, string prenom, string telephone, string mail )
         {
-            throw new NotImplementedException();
+            ClientId = id;
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            Mail = mail;
+            Commandes = new List<Commande>();
         }
+
+        public Client( string nom, string prenom, string telephone, string mail )
+            : this(0, nom, prenom, telephone, mail) { }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{Nom} {Prenom} — {Telephone}";
         }
     }
 }
