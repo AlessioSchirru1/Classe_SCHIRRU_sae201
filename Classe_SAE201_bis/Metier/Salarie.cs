@@ -21,5 +21,5 @@
         public bool EstChef() => RoleSalarie == "chef_boulanger";
 
         public override string ToString() => $"{Prenom} {Nom} ({RoleSalarie})";
-    }
+    }  
 }
