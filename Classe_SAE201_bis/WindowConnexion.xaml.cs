@@ -33,9 +33,9 @@ namespace Classe_SAE201_bis
 				main.Show();
 				this.Close();
 			}
-			catch
+			catch (Exception ex)
 			{
-				TxtErreur.Text = "Identifiant ou mot de passe incorrect.";
+				TxtErreur.Text = ex.Message;
 				TxtErreur.Visibility = Visibility.Visible;
 			}
 		}
