@@ -6,9 +6,6 @@ namespace Classe_SAE201_bis.DAL
 {
     public class DALProduit
     {
-        /// <summary>
-        /// Retourne tous les produits disponibles, avec recette, catégorie et allergènes.
-        /// </summary>
         public static List<Produit> GetTous( bool inclureIndisponibles = false )
         {
             var produits = new List<Produit>();
@@ -38,9 +35,6 @@ namespace Classe_SAE201_bis.DAL
             return produits;
         }
 
-        /// <summary>
-        /// Ajoute un nouveau produit au catalogue.
-        /// </summary>
         public static void Ajouter( Produit produit )
         {
             string sql = @"INSERT INTO produit (recette_id, est_indisponible, nb_parts, prix)
@@ -53,9 +47,6 @@ namespace Classe_SAE201_bis.DAL
             cmd.ExecuteNonQuery();
         }
 
-        /// <summary>
-        /// Modifie le prix et la disponibilité d'un produit.
-        /// </summary>
         public static void Modifier( Produit produit )
         {
             string sql = @"UPDATE produit SET prix = @prix, est_indisponible = @indispo
@@ -67,15 +58,28 @@ namespace Classe_SAE201_bis.DAL
             cmd.ExecuteNonQuery();
         }
 
-        /// <summary>
-        /// Rend un produit indisponible (pas de suppression physique).
-        /// </summary>
         public static void RendreIndisponible( int produitId )
         {
             string sql = "UPDATE produit SET est_indisponible = true WHERE produit_id = @id";
             using var cmd = new NpgsqlCommand(sql, DALConnexion.GetConnexion());
             cmd.Parameters.AddWithValue("@id", produitId);
             cmd.ExecuteNonQuery();
+        }
+
+        public static List<Allergene> GetAllergenesPourRecette( int recetteId )
+        {
+            var allergenes = new List<Allergene>();
+            string sql = @"SELECT a.allergene_id, a.allergene_nom
+                   FROM allergene a
+                   JOIN recette_allergene ra ON a.allergene_id = ra.allergene_id
+                   WHERE ra.recette_id = @id
+                   ORDER BY a.allergene_nom";
+            using var cmd = new NpgsqlCommand(sql, DALConnexion.GetConnexion());
+            cmd.Parameters.AddWithValue("@id", recetteId);
+            using var reader = cmd.ExecuteReader();
+            while(reader.Read())
+                allergenes.Add(new Allergene(reader.GetInt32(0), reader.GetString(1)));
+            return allergenes;
         }
     }
 }

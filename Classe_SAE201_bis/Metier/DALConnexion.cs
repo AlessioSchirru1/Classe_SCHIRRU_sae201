@@ -33,7 +33,7 @@ namespace Classe_SAE201_bis.DAL
                        $"Username={login};Password={motDePasse};";
             _connexion = new NpgsqlConnection(chaineCnx);
             _connexion.Open();
-            using var cmd = new NpgsqlCommand($"SET search_path TO \"{SCHEMA}\", public;", _connexion);
+            using var cmd = new NpgsqlCommand($"SET search_path TO \"{SCHEMA}\";", _connexion);
             cmd.ExecuteNonQuery();
             return _connexion;
         }

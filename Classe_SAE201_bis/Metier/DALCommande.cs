@@ -1,5 +1,4 @@
 ﻿using Classe_SAE201_bis.Metier;
-using Classe_SAE201_bis.Metier;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -8,17 +7,11 @@ namespace Classe_SAE201_bis.DAL
 {
     public class DALCommande
     {
-        /// <summary>
-        /// Retourne les commandes dont la date de retrait est aujourd'hui.
-        /// </summary>
         public static List<Commande> GetCommandesDuJour()
         {
             return GetCommandes("WHERE c.date_retrait = CURRENT_DATE");
         }
 
-        /// <summary>
-        /// Retourne toutes les commandes (pour le chef).
-        /// </summary>
         public static List<Commande> GetToutes()
         {
             return GetCommandes("");
@@ -71,9 +64,6 @@ namespace Classe_SAE201_bis.DAL
             return commandes;
         }
 
-        /// <summary>
-        /// Crée une nouvelle commande et retourne son ID.
-        /// </summary>
         public static int Creer( Commande commande )
         {
             string sql = @"INSERT INTO commande 
@@ -112,9 +102,6 @@ namespace Classe_SAE201_bis.DAL
             return commandeId;
         }
 
-        /// <summary>
-        /// Marque une commande comme prête à emporter.
-        /// </summary>
         public static void MarquerPrete( int commandeId )
         {
             string sql = "UPDATE commande SET est_prete = true WHERE commande_id = @id";
@@ -123,9 +110,6 @@ namespace Classe_SAE201_bis.DAL
             cmd.ExecuteNonQuery();
         }
 
-        /// <summary>
-        /// Marque une commande comme récupérée (restituée au client).
-        /// </summary>
         public static void MarquerRecuperee( int commandeId )
         {
             string sql = "UPDATE commande SET est_recuperee = true WHERE commande_id = @id";
@@ -133,5 +117,91 @@ namespace Classe_SAE201_bis.DAL
             cmd.Parameters.AddWithValue("@id", commandeId);
             cmd.ExecuteNonQuery();
         }
+        public static void ModifierStatut( int commandeId, bool estPrete, bool estRecuperee )
+        {
+            string sql = @"UPDATE commande 
+                   SET est_prete = @prete, est_recuperee = @recuperee
+                   WHERE commande_id = @id";
+            using var cmd = new NpgsqlCommand(sql, DALConnexion.GetConnexion());
+            cmd.Parameters.AddWithValue("@prete", estPrete);
+            cmd.Parameters.AddWithValue("@recuperee", estRecuperee);
+            cmd.Parameters.AddWithValue("@id", commandeId);
+            cmd.ExecuteNonQuery();
+        }
+
+        public static List<CategorieEvenement> GetCategoriesEvenement()
+        {
+            var categories = new List<CategorieEvenement>();
+            string sql = "SELECT categorie_evenement_id, categorie_evenement_nom FROM categorie_evenement ORDER BY categorie_evenement_nom";
+            using var cmd = new NpgsqlCommand(sql, DALConnexion.GetConnexion());
+            using var reader = cmd.ExecuteReader();
+            while(reader.Read())
+                categories.Add(new CategorieEvenement(reader.GetInt32(0), reader.GetString(1)));
+            return categories;
+        }
+
+        public static List<LigneCommande> GetLignesCommande( int commandeId )
+        {
+            var lignes = new List<LigneCommande>();
+            string sql = @"
+        SELECT lc.produit_id, lc.quantite, lc.est_decoupe,
+               p.nb_parts, p.prix, p.est_indisponible,
+               r.recette_id, r.recette_nom, r.recette_description,
+               c.categorie_id, c.categorie_nom
+        FROM ligne_commande lc
+        JOIN produit p ON lc.produit_id = p.produit_id
+        JOIN recette r ON p.recette_id = r.recette_id
+        JOIN categorie c ON r.categorie_id = c.categorie_id
+        WHERE lc.commande_id = @id";
+
+            using var cmd = new NpgsqlCommand(sql, DALConnexion.GetConnexion());
+            cmd.Parameters.AddWithValue("@id", commandeId);
+            using var reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                var cat = new Categorie(reader.GetInt32(9), reader.GetString(10));
+                var rec = new Recette(reader.GetInt32(6), reader.GetString(7),
+                              reader.IsDBNull(8) ? "" : reader.GetString(8), cat);
+                var produit = new Produit(reader.GetInt32(0), rec,
+                                  reader.GetInt32(3), (double)reader.GetDecimal(4),
+                                  reader.GetBoolean(5));
+                lignes.Add(new LigneCommande(produit, reader.GetInt32(1), reader.GetBoolean(2)));
+            }
+            return lignes;
+        }
+
+        public static void ModifierCommande( int commandeId, List<LigneCommande> lignes, double total )
+        {
+            // Supprimer les anciennes lignes
+            string sqlDelete = "DELETE FROM ligne_commande WHERE commande_id = @id";
+            using var cmdD = new NpgsqlCommand(sqlDelete, DALConnexion.GetConnexion());
+            cmdD.Parameters.AddWithValue("@id", commandeId);
+            cmdD.ExecuteNonQuery();
+
+            // Mettre à jour le total et l'acompte
+            string sqlUpdate = @"UPDATE commande 
+                         SET total = @total, acompte = @acompte 
+                         WHERE commande_id = @id";
+            using var cmdU = new NpgsqlCommand(sqlUpdate, DALConnexion.GetConnexion());
+            cmdU.Parameters.AddWithValue("@total", total);
+            cmdU.Parameters.AddWithValue("@acompte", total * 0.25);
+            cmdU.Parameters.AddWithValue("@id", commandeId);
+            cmdU.ExecuteNonQuery();
+
+            // Réinsérer les nouvelles lignes
+            foreach(var ligne in lignes)
+            {
+                string sqlLigne = @"INSERT INTO ligne_commande 
+                            (commande_id, produit_id, quantite, est_decoupe)
+                            VALUES (@cmd, @prod, @qte, @dec)";
+                using var cmdL = new NpgsqlCommand(sqlLigne, DALConnexion.GetConnexion());
+                cmdL.Parameters.AddWithValue("@cmd", commandeId);
+                cmdL.Parameters.AddWithValue("@prod", ligne.Produit.ProduitId);
+                cmdL.Parameters.AddWithValue("@qte", ligne.Quantite);
+                cmdL.Parameters.AddWithValue("@dec", ligne.EstDecoupe);
+                cmdL.ExecuteNonQuery();
+            }
+        }
+
     }
 }
