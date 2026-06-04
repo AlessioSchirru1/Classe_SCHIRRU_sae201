@@ -218,9 +218,7 @@
                     </DataGrid.ColumnHeaderStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="N° Commande"
-                                            Binding="{Binding NumCommande}"
-                                            Width="120" />
+                        
                         <DataGridTextColumn Header="Client"
                                             Binding="{Binding NomClient}"
                                             Width="160" />

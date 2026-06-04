@@ -71,7 +71,6 @@ namespace Classe_SAE201_bis.Pages
     public class ClientVM
     {
         public int ClientId { get; set; }
-        public string IdStr { get; set; }
         public string NomComplet { get; set; }
         public string Mail { get; set; }
         public string Telephone { get; set; }
@@ -80,7 +79,6 @@ namespace Classe_SAE201_bis.Pages
         public ClientVM( Client c )
         {
             ClientId = c.ClientId;
-            IdStr = $"CLT-{c.ClientId:D3}";
             NomComplet = $"{c.Prenom} {c.Nom}".Trim();
             Mail = c.Mail ?? "—";
             Telephone = c.Telephone;

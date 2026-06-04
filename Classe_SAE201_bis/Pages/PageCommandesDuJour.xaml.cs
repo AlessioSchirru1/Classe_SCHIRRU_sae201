@@ -55,7 +55,6 @@ namespace Classe_SAE201_bis.Pages
     public class CommandeDuJourVM
     {
         public int CommandeId { get; set; }
-        public string NumCommande { get; set; }
         public string NomClient { get; set; }
         public string Produits { get; set; }
         public string TotalStr { get; set; }
@@ -68,13 +67,11 @@ namespace Classe_SAE201_bis.Pages
         public CommandeDuJourVM( Commande c )
         {
             CommandeId = c.CommandeId;
-            NumCommande = $"CMD-{c.CommandeId:D3}";
             NomClient = $"{c.Client.Prenom} {c.Client.Nom}";
             TotalStr = $"{c.Total:0.00} €";
             EstPrete = c.EstPrete;
             EstRecuperee = c.EstRecuperee;
 
-            // Produits (lignes de commande — affichage simplifié)
             Produits = c.Lignes.Count > 0
                 ? string.Join(", ", c.Lignes.Select(l => l.Produit.Recette.RecetteNom))
                 : "—";

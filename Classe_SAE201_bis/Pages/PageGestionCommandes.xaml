@@ -139,10 +139,7 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="N°"
-                                        Binding="{Binding NumCommande}"
-                                        Width="80"
-                                        IsReadOnly="True" />
+                    
                     <DataGridTextColumn Header="Client"
                                         Binding="{Binding NomClient}"
                                         Width="160"

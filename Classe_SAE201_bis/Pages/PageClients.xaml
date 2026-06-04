@@ -212,9 +212,7 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID"
-                                        Binding="{Binding IdStr}"
-                                        Width="80" />
+                    
                     <DataGridTextColumn Header="Nom"
                                         Binding="{Binding NomComplet}"
                                         Width="160" />
