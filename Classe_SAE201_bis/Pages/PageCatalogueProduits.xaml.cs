@@ -67,6 +67,7 @@ namespace Classe_SAE201_bis.Pages
 			if (vm == null) return;
 
 			var dialog = new WindowModifierProduit(vm.ToProduit());
+			dialog.Owner = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 			if (dialog.ShowDialog() == true)
 				ChargerProduits();
 		}
@@ -86,10 +87,8 @@ namespace Classe_SAE201_bis.Pages
 		private void BtnSupprimer_Click(object sender, RoutedEventArgs e)
 		{
 			int id = (int)((Button)sender).Tag;
-			var result = MessageBox.Show(
-				"Supprimer définitivement ce produit ?",
+			var result = MessageBox.Show("Supprimer ce produit définitivement ?",
 				"Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
 			if (result == MessageBoxResult.Yes)
 			{
 				try
@@ -99,8 +98,7 @@ namespace Classe_SAE201_bis.Pages
 				}
 				catch
 				{
-					MessageBox.Show(
-						"Impossible de supprimer ce produit car il est utilisé dans des commandes.",
+					MessageBox.Show("Impossible de supprimer ce produit (utilisé dans des commandes).",
 						"Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
@@ -111,6 +109,7 @@ namespace Classe_SAE201_bis.Pages
 			try
 			{
 				var dialog = new WindowAjouterProduit();
+				dialog.Owner = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 				if (dialog.ShowDialog() == true)
 					ChargerProduits();
 			}
@@ -147,7 +146,6 @@ namespace Classe_SAE201_bis.Pages
 				? string.Join(", ", allergenes.Select(a => a.AllergeneNom))
 				: "Aucun";
 
-			// Format selon catégorie
 			if (CategorieNom == "Viennoiseries")
 				FormatStr = p.NbParts == 1 ? "Unité" : $"Lot de {p.NbParts}";
 			else if (CategorieNom == "Pains")
@@ -155,7 +153,6 @@ namespace Classe_SAE201_bis.Pages
 			else
 				FormatStr = p.NbParts == 1 ? "1 part" : $"{p.NbParts} parts";
 
-			// Statut
 			if (p.EstIndisponible)
 			{
 				StatutStr = "Indisponible";
