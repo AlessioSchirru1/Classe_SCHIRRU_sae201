@@ -49,8 +49,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="6">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Margin="{TemplateBinding Padding}"/>
@@ -75,21 +74,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0"
-                       Text="Gestion des produits"
-                       FontSize="26" FontWeight="Bold"
-                       Foreground="#2C1810"/>
-            <Button Grid.Column="1"
-                    Content="+ Ajouter un produit"
+            <TextBlock Grid.Column="0" Text="Gestion des produits"
+                       FontSize="26" FontWeight="Bold" Foreground="#2C1810"/>
+            <Button Grid.Column="1" Content="+ Ajouter un produit"
                     Click="BtnAjouterProduit_Click"
                     Background="#6B3A2A" Foreground="White"
-                    Height="36" Padding="16,0"
-                    BorderThickness="0" Cursor="Hand"
-                    FontSize="13" FontWeight="SemiBold">
+                    Height="36" Padding="16,0" BorderThickness="0"
+                    Cursor="Hand" FontSize="13" FontWeight="SemiBold">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="8">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Margin="{TemplateBinding Padding}"/>
@@ -118,29 +112,21 @@
         <!-- Toggle indisponibles -->
         <CheckBox Grid.Row="2" x:Name="ChkIndisponibles"
                   Content="Afficher les produits indisponibles"
-                  Foreground="#6B4226" FontSize="12"
-                  Margin="0,0,0,12"
+                  Foreground="#6B4226" FontSize="12" Margin="0,0,0,12"
                   Checked="ChkIndisponibles_Changed"
                   Unchecked="ChkIndisponibles_Changed"/>
 
         <!-- Tableau -->
         <Border Grid.Row="3" Background="White" CornerRadius="12">
-            <DataGrid x:Name="GridProduits"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      GridLinesVisibility="Horizontal"
-                      HeadersVisibility="Column"
-                      BorderThickness="0"
-                      Background="White"
-                      RowBackground="White"
+            <DataGrid x:Name="GridProduits" AutoGenerateColumns="False"
+                      IsReadOnly="True" GridLinesVisibility="Horizontal"
+                      HeadersVisibility="Column" BorderThickness="0"
+                      Background="White" RowBackground="White"
                       AlternatingRowBackground="#FAFAFA"
                       HorizontalGridLinesBrush="#F0E8E0"
-                      SelectionMode="Single"
-                      CanUserResizeColumns="False"
-                      CanUserReorderColumns="False"
-                      FontSize="13"
-                      Foreground="#2C1810"
-                      Margin="16,8,16,8">
+                      SelectionMode="Single" CanUserResizeColumns="False"
+                      CanUserReorderColumns="False" FontSize="13"
+                      Foreground="#2C1810" Margin="16,8,16,8">
 
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -154,23 +140,16 @@
                 </DataGrid.ColumnHeaderStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Recette"
-                                        Binding="{Binding RecetteNom}"
+                    <DataGridTextColumn Header="Recette" Binding="{Binding RecetteNom}"
                                         Width="150" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Catégorie"
-                                        Binding="{Binding CategorieNom}"
+                    <DataGridTextColumn Header="Catégorie" Binding="{Binding CategorieNom}"
                                         Width="110" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Format"
-                                        Binding="{Binding FormatStr}"
-                                        Width="120" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Prix TTC"
-                                        Binding="{Binding PrixStr}"
-                                        Width="90" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Allergènes"
-                                        Binding="{Binding AllergenesStr}"
+                    <DataGridTextColumn Header="Format" Binding="{Binding FormatStr}"
+                                        Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Prix TTC" Binding="{Binding PrixStr}"
+                                        Width="80" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Allergènes" Binding="{Binding AllergenesStr}"
                                         Width="*" IsReadOnly="True"/>
-
-                    <!-- Statut badge -->
                     <DataGridTemplateColumn Header="Statut" Width="110" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -184,12 +163,11 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
-                    <!-- Actions -->
-                    <DataGridTemplateColumn Header="Actions" Width="170" IsReadOnly="True">
+                    <DataGridTemplateColumn Header="Actions" Width="220" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,4">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center" Margin="0,4">
                                     <Button Content="✏ Modifier"
                                             Tag="{Binding ProduitId}"
                                             Click="BtnModifier_Click"
@@ -201,7 +179,13 @@
                                             Click="BtnToggleDisponible_Click"
                                             Style="{StaticResource ActionBtnStyle}"
                                             Background="{Binding BgBtnDispo}"
-                                            Foreground="White"/>
+                                            Foreground="White"
+                                            Margin="0,0,6,0"/>
+                                    <Button Content="🗑"
+                                            Tag="{Binding ProduitId}"
+                                            Click="BtnSupprimer_Click"
+                                            Style="{StaticResource ActionBtnStyle}"
+                                            Background="#FDECEA" Foreground="#C0392B"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

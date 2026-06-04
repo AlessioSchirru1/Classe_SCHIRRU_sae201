@@ -18,8 +18,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="8">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Margin="{TemplateBinding Padding}"/>
@@ -32,6 +31,11 @@
                BasedOn="{StaticResource BtnPrincipalStyle}">
             <Setter Property="Background" Value="#F5EDE4"/>
             <Setter Property="Foreground" Value="#6B3A2A"/>
+        </Style>
+        <Style x:Key="BtnDangerStyle" TargetType="Button"
+               BasedOn="{StaticResource BtnPrincipalStyle}">
+            <Setter Property="Background" Value="#FDECEA"/>
+            <Setter Property="Foreground" Value="#C0392B"/>
         </Style>
     </Page.Resources>
 
@@ -47,16 +51,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0"
-                       Text="Catégories de produits"
-                       FontSize="26" FontWeight="Bold"
-                       Foreground="#2C1810"/>
-            <Button Grid.Column="1"
-                    Content="+ Ajouter une catégorie"
+            <TextBlock Grid.Column="0" Text="Catégories de produits"
+                       FontSize="26" FontWeight="Bold" Foreground="#2C1810"/>
+            <Button Grid.Column="1" Content="+ Ajouter une catégorie"
                     Click="BtnAjouter_Click"
                     Style="{StaticResource BtnPrincipalStyle}"
-                    Height="36" Padding="16,0"
-                    FontWeight="SemiBold"/>
+                    Height="36" Padding="16,0" FontWeight="SemiBold"/>
         </Grid>
 
         <!-- Contenu : liste + panneau -->
@@ -69,24 +69,16 @@
             <!-- Liste catégories -->
             <Border Grid.Column="0" Background="White"
                     CornerRadius="12" Margin="0,0,16,0">
-                <DataGrid x:Name="GridCategories"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          GridLinesVisibility="Horizontal"
-                          HeadersVisibility="Column"
-                          BorderThickness="0"
-                          Background="White"
-                          RowBackground="White"
+                <DataGrid x:Name="GridCategories" AutoGenerateColumns="False"
+                          IsReadOnly="True" GridLinesVisibility="Horizontal"
+                          HeadersVisibility="Column" BorderThickness="0"
+                          Background="White" RowBackground="White"
                           AlternatingRowBackground="#FAFAFA"
                           HorizontalGridLinesBrush="#F0E8E0"
-                          SelectionMode="Single"
-                          CanUserResizeColumns="False"
-                          CanUserReorderColumns="False"
-                          FontSize="13"
-                          Foreground="#2C1810"
-                          Margin="16,8,16,8"
+                          SelectionMode="Single" CanUserResizeColumns="False"
+                          CanUserReorderColumns="False" FontSize="13"
+                          Foreground="#2C1810" Margin="16,8,16,8"
                           SelectionChanged="GridCategories_SelectionChanged">
-
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="White"/>
@@ -97,80 +89,65 @@
                             <Setter Property="BorderThickness" Value="0"/>
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
-
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID"
-                                            Binding="{Binding IdStr}"
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdStr}"
                                             Width="70" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Nom de la catégorie"
-                                            Binding="{Binding Nom}"
+                        <DataGridTextColumn Header="Nom de la catégorie" Binding="{Binding Nom}"
                                             Width="*" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Nb recettes"
-                                            Binding="{Binding NbRecettes}"
+                        <DataGridTextColumn Header="Nb recettes" Binding="{Binding NbRecettes}"
                                             Width="110" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
 
-            <!-- Panneau droite : ajouter / modifier -->
-            <Border Grid.Column="1" Background="White"
-                    CornerRadius="12" Padding="24">
+            <!-- Panneau droite -->
+            <Border Grid.Column="1" Background="White" CornerRadius="12" Padding="24">
                 <StackPanel>
                     <TextBlock x:Name="TxtTitrePanelDetail"
                                Text="Ajouter une catégorie"
                                FontSize="16" FontWeight="Bold"
-                               Foreground="#2C1810"
-                               Margin="0,0,0,20"/>
+                               Foreground="#2C1810" Margin="0,0,0,20"/>
 
                     <TextBlock Text="Nom de la catégorie"
-                               FontSize="12" Foreground="#888"
-                               Margin="0,0,0,6"/>
+                               FontSize="12" Foreground="#888" Margin="0,0,0,6"/>
                     <Border BorderBrush="#D4B89A" BorderThickness="1"
                             CornerRadius="8" Padding="12,10" Margin="0,0,0,16">
-                        <TextBox x:Name="TxtNomCategorie"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 FontSize="13" Foreground="#2C1810"/>
+                        <TextBox x:Name="TxtNomCategorie" BorderThickness="0"
+                                 Background="Transparent" FontSize="13" Foreground="#2C1810"/>
                     </Border>
 
-                    <TextBlock x:Name="TxtErreur"
-                               Foreground="#C0392B" FontSize="12"
-                               Margin="0,0,0,10"
-                               Visibility="Collapsed"
-                               TextWrapping="Wrap"/>
+                    <TextBlock x:Name="TxtErreur" Foreground="#C0392B" FontSize="12"
+                               Margin="0,0,0,10" Visibility="Collapsed" TextWrapping="Wrap"/>
 
-                    <Button x:Name="BtnEnregistrer"
-                            Content="Enregistrer"
+                    <Button x:Name="BtnEnregistrer" Content="Enregistrer"
                             Click="BtnEnregistrer_Click"
                             Style="{StaticResource BtnPrincipalStyle}"
-                            Height="40" Padding="0,0"
-                            FontWeight="SemiBold"
-                            Margin="0,0,0,8"/>
+                            Height="40" Padding="0,0" FontWeight="SemiBold" Margin="0,0,0,8"/>
 
-                    <Button x:Name="BtnAnnuler"
-                            Content="Annuler"
+                    <Button x:Name="BtnAnnuler" Content="Annuler"
                             Click="BtnAnnuler_Click"
                             Style="{StaticResource BtnSecondaireStyle}"
+                            Height="38" Padding="0,0"
+                            Margin="0,0,0,8" Visibility="Collapsed"/>
+
+                    <Button x:Name="BtnSupprimer" Content="🗑  Supprimer la catégorie"
+                            Click="BtnSupprimer_Click"
+                            Style="{StaticResource BtnDangerStyle}"
                             Height="38" Padding="0,0"
                             Visibility="Collapsed"/>
 
                     <!-- Séparateur -->
-                    <Border x:Name="SeparateurDetail"
-                            Height="1" Background="#F0E8E0"
-                            Margin="0,20,0,20"
-                            Visibility="Collapsed"/>
+                    <Border x:Name="SeparateurDetail" Height="1" Background="#F0E8E0"
+                            Margin="0,20,0,20" Visibility="Collapsed"/>
 
                     <!-- Recettes de la catégorie -->
                     <StackPanel x:Name="PanelDetail" Visibility="Collapsed">
                         <TextBlock Text="Recettes dans cette catégorie"
                                    FontSize="13" FontWeight="SemiBold"
                                    Foreground="#2C1810" Margin="0,0,0,10"/>
-                        <ListBox x:Name="ListeRecettes"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 MaxHeight="200"
-                                 FontSize="12"
-                                 Foreground="#6B4226"/>
+                        <ListBox x:Name="ListeRecettes" BorderThickness="0"
+                                 Background="Transparent" MaxHeight="200"
+                                 FontSize="12" Foreground="#6B4226"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
