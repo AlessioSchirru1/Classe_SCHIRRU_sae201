@@ -90,8 +90,6 @@
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding IdStr}"
-                                            Width="70" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Nom de la catégorie" Binding="{Binding Nom}"
                                             Width="*" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Nb recettes" Binding="{Binding NbRecettes}"
