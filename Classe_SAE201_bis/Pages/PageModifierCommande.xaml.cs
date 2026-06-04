@@ -30,7 +30,7 @@ namespace Classe_SAE201_bis.Pages
             var commande = commandes.FirstOrDefault(c => c.CommandeId == _commandeId);
             if(commande != null)
             {
-                TxtTitre.Text = $"Modifier la commande CMD-{_commandeId:D3}";
+                TxtTitre.Text = "Modifier la commande";
                 TxtSousTitre.Text = $"{commande.Client.Prenom} {commande.Client.Nom} — Retrait le {commande.DateRetrait:dd/MM/yyyy}";
             }
 

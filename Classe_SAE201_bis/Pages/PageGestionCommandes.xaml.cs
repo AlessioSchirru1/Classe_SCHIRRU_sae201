@@ -95,7 +95,6 @@ namespace Classe_SAE201_bis.Pages
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int CommandeId { get; set; }
-        public string NumCommande { get; set; }
         public string NomClient { get; set; }
         public string DateRetrait { get; set; }
         public int NbPersonnes { get; set; }
@@ -126,7 +125,6 @@ namespace Classe_SAE201_bis.Pages
         public CommandeVM( Commande c )
         {
             CommandeId = c.CommandeId;
-            NumCommande = $"CMD-{c.CommandeId:D3}";
             NomClient = $"{c.Client.Prenom} {c.Client.Nom}";
             DateRetrait = c.DateRetrait.ToString("dd MMM yyyy");
             NbPersonnes = c.NbPersonnes;
