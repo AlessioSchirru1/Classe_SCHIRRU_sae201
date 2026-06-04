@@ -82,6 +82,12 @@ namespace Classe_SAE201_bis.Pages
             // Rafraîchir le DataGrid
             GridCommandes.Items.Refresh();
         }
+
+        private void BtnModifier_Click(object sender, RoutedEventArgs e)
+        {
+            int commandeId = (int)((Button)sender).Tag;
+            NavigationService?.Navigate(new PageModifierCommande(commandeId, _salarie));
+        }
     }
 
     public class CommandeVM :INotifyPropertyChanged
@@ -155,5 +161,6 @@ namespace Classe_SAE201_bis.Pages
                     break;
             }
         }
+        
     }
 }

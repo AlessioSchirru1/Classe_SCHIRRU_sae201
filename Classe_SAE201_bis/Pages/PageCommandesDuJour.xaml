@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Classe_SAE201_bis.Pages"
       mc:Ignorable="d"
       Background="#F5EDE3"
-      Title="PageCommandesDuJour">
+      Title="PageCommandesDuJour" Height="700" Width="1000">
 
     <Page.Resources>
         <Style x:Key="CarteStyle"
