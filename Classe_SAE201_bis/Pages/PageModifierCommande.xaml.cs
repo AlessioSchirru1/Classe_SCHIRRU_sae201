@@ -180,7 +180,6 @@ namespace Classe_SAE201_bis.Pages
             double total = _selection.Sum(s => s.SousTotal);
             DALCommande.ModifierCommande(_commandeId, lignes, total);
 
-            MessageBox.Show("Commande modifiée avec succès !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
             NavigationService?.GoBack();
         }
 
