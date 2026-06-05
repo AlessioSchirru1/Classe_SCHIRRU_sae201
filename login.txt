@@ -1,0 +1,17 @@
+﻿{
+  "serveur": "postgresql-prime.alwaysdata.net",
+  "port": "5432",
+  "base": "prime_sae201",
+  "schema": "SAE201"
+}
+"login": "prime"
+"password": "ZrBzmB9Y#.RS2cD"
+
+{
+  "serveur": "srv-peda-new",
+  "port": "5433",
+  "base": "alessio_paul",
+  "schema": "SAE201"
+}
+"login": "schirrua"
+"password": "7PRsG0"
