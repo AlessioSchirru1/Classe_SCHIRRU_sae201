@@ -102,7 +102,6 @@ namespace Classe_SAE201_bis.Pages
 				int recetteId = DALRecette.Ajouter(recette);
 				recette.RecetteId = recetteId;
 
-				// Allergènes cochés
 				var allergenesCoches = (ListAllergenes.ItemsSource as List<AllergeneCheck>)
 					?.Where(a => a.Coche)
 					.Select(a => a.Allergene)

@@ -70,13 +70,11 @@ namespace Classe_SAE201_bis.DAL
 
 		public static void MettreAJourAllergenes(int recetteId, List<Allergene> allergenes)
 		{
-			// Supprimer tous les allergènes existants
 			string sqlDelete = "DELETE FROM recette_allergene WHERE recette_id = @id";
 			using var cmdD = new NpgsqlCommand(sqlDelete, DALConnexion.GetConnexion());
 			cmdD.Parameters.AddWithValue("@id", recetteId);
 			cmdD.ExecuteNonQuery();
 
-			// Réinsérer les cochés
 			foreach (var a in allergenes)
 			{
 				string sql = @"INSERT INTO recette_allergene (allergene_id, recette_id)

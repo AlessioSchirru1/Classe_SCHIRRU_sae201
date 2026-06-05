@@ -29,7 +29,6 @@ namespace Classe_SAE201_bis.Pages
             var commandes = DALCommande.GetCommandesDuJour();
             var vms = commandes.Select(c => new CommandeDuJourVM(c)).ToList();
 
-            // Stats
             TxtTotal.Text = vms.Count.ToString();
             TxtARetirer.Text = vms.Count(c => !c.EstRecuperee).ToString();
             TxtPretes.Text = vms.Count(c => c.EstPrete && !c.EstRecuperee).ToString();

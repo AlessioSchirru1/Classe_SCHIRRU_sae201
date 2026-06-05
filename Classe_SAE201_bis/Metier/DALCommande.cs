@@ -86,7 +86,6 @@ namespace Classe_SAE201_bis.DAL
 
             int commandeId = (int)cmd.ExecuteScalar();
 
-            // Insertion des lignes
             foreach(var ligne in commande.Lignes)
             {
                 string sqlLigne = @"INSERT INTO ligne_commande 
@@ -172,13 +171,11 @@ namespace Classe_SAE201_bis.DAL
 
         public static void ModifierCommande( int commandeId, List<LigneCommande> lignes, double total )
         {
-            // Supprimer les anciennes lignes
             string sqlDelete = "DELETE FROM ligne_commande WHERE commande_id = @id";
             using var cmdD = new NpgsqlCommand(sqlDelete, DALConnexion.GetConnexion());
             cmdD.Parameters.AddWithValue("@id", commandeId);
             cmdD.ExecuteNonQuery();
 
-            // Mettre à jour le total et l'acompte
             string sqlUpdate = @"UPDATE commande 
                          SET total = @total, acompte = @acompte 
                          WHERE commande_id = @id";
@@ -188,7 +185,6 @@ namespace Classe_SAE201_bis.DAL
             cmdU.Parameters.AddWithValue("@id", commandeId);
             cmdU.ExecuteNonQuery();
 
-            // Réinsérer les nouvelles lignes
             foreach(var ligne in lignes)
             {
                 string sqlLigne = @"INSERT INTO ligne_commande 

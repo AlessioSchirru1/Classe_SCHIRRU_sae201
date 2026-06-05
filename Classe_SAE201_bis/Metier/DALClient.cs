@@ -6,9 +6,6 @@ namespace Classe_SAE201_bis.DAL
 {
     public class DALClient
     {
-        /// <summary>
-        /// Recherche des clients par nom ou téléphone.
-        /// </summary>
         public static List<Client> Rechercher( string recherche )
         {
             var clients = new List<Client>();
@@ -36,9 +33,6 @@ namespace Classe_SAE201_bis.DAL
             return clients;
         }
 
-        /// <summary>
-        /// Crée un nouveau client en base et retourne son ID.
-        /// </summary>
         public static int Creer( Client client )
         {
             string sql = @"INSERT INTO client (nom, prenom, telephone, mail)

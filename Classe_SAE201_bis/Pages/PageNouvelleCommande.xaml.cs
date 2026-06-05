@@ -285,7 +285,6 @@ namespace Classe_SAE201_bis.Pages
             BtnRetour.Visibility = etape > 1 ? Visibility.Visible : Visibility.Collapsed;
             BtnSuivant.Content = etape == 3 ? "✓ Valider la commande" : "Suivant →";
 
-            // Couleurs indicateur étapes
             MettreAJourIndicateurs();
         }
 
@@ -337,7 +336,6 @@ namespace Classe_SAE201_bis.Pages
                 commande.Total = total;
                 commande.Acompte = acompte;
 
-                // Récupérer les produits pour créer les lignes
                 var tousP = DALProduit.GetTous(false);
                 foreach(var s in _selection)
                 {

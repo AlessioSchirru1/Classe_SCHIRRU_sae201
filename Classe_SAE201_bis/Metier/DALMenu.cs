@@ -5,9 +5,6 @@ namespace Classe_SAE201_bis.DAL
 {
     public class DALMenu
     {
-        /// <summary>
-        /// Retourne les items de menu selon le rôle du salarié connecté.
-        /// </summary>
         public static List<string> GetMenuParRole( string role )
         {
             var menus = new List<string>();
